@@ -14,6 +14,7 @@ class Counter extends React.Component {
 
         this.state = {
             initialValue: props.value
+            // since you need to remember what the original value was, data has to be stored as a state
         }
 
         // Don't use these here, instead do as a method. Long constructors slow down program
@@ -38,7 +39,7 @@ class Counter extends React.Component {
     render() {
         return(
         <div>
-            <h1 className="App-logo">{this.props.value}</h1>
+            <h1>{this.props.value}</h1>
         <button onClick={this._addButton} >{this.props.changeBy}</button>
         <button onClick={this._subtractButton}>-{this.props.changeBy}</button>
             <button onClick={this._resetButton}>Reset</button>
@@ -49,8 +50,7 @@ class Counter extends React.Component {
     // Write helper functions as arrow functions. Arrow functions retain the correct value of the 'this' keyword
 
     _addButton = () => {
-        const newVal = this.props.value + this.props.changeBy;
-        this.props.clickHandler(this.props.index, newVal);
+        this.props.clickHandler(this.props.changeBy);
         // this is removed because the parent element has this
         // this.setState({
         //     value: this.props.value + this.props.changeBy
@@ -58,8 +58,7 @@ class Counter extends React.Component {
       }
     
       _subtractButton = () => {
-        const newVal = this.props.value - this.props.changeBy;
-        this.props.clickHandler(this.props.index, newVal);
+        this.props.clickHandler((this.props.changeBy * -1));
         // this is removed by the parent element per above
         // this.setState({
         //     value: this.props.value - this.props.changeBy
@@ -67,7 +66,7 @@ class Counter extends React.Component {
       }
     
       _resetButton = () => {
-          this.props.clickHandler(this.props.index, this.state.initialValue);
+        this.props.resetValue();
         // this.setState({
         //     value: this.props.value
         // })

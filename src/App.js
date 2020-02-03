@@ -11,7 +11,9 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-      values: [10, 99]
+      values: [10, 99],
+      initialValues: [10, 99],
+      changeBy: [2, 4]
     }
   }
 
@@ -19,31 +21,48 @@ class App extends React.Component {
   render () {
     return (
       <div className="App App-header">
-        <Counter
-        value={this.state.values[0]}
-        changeBy={2}
-        clickHandler={this._updateValue}
-        index={0}
-        />
-        <Counter
-        value={this.state.values[1]}
-        changeBy={4}
-        clickHandler={this._updateValue}
-        index={1}
-        />
+
+        { // to map through states to create components
+          this.state.values.map((num, i) => {
+            return (
+            <Counter
+              key={index}
+              value={num}
+              changeBy={this.state.changeBy[i]}
+              clickHandler={this._updateValues}
+              resetValue={this._resetValue}
+            />)
+          })
+
+        }
       </div>
     );
   }
 
   _updateValue = (index, newValue) => {
-    // make a copy of the current values array
-    const newValues = [...this.state.values]
-    // modify the copy
+    // make a copy of the current values
+    let newValues = [...this.state.values];
+    // modify the values
     newValues[index] = newValue;
+    // update the state with a new copy
+    this.setState({
+      values: newValues
+    })
+  }
+
+  _updateValues = (modifyAmount) => {
+    // make a copy of the current values array and modify the copy
+    const newValues = this.state.values.map(num => num + modifyAmount);
     // update state with the new copy
     this.setState({
       values: newValues
     });
+  }
+
+  _resetValue = () => {
+    this.setState({
+      values: this.state.initialValues
+    })
   }
 }
 export default App;
