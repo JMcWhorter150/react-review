@@ -11,9 +11,9 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-      values: [10, 99],
-      initialValues: [10, 99],
-      changeBy: [2, 4]
+      values: [10, 99, 800, 41, 27],
+      initialValues: [10, 99, 800, 41, 27],
+      changeBy: [2, 4, 1, 44, 76]
     }
   }
 
@@ -26,7 +26,7 @@ class App extends React.Component {
           this.state.values.map((num, i) => {
             return (
             <Counter
-              key={index}
+              key={i}
               value={num}
               changeBy={this.state.changeBy[i]}
               clickHandler={this._updateValues}
