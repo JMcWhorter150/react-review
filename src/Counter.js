@@ -31,14 +31,15 @@ class Counter extends React.Component {
     render() {
         return(
         <div>
-            <h1>{this.state.value}</h1>
-        <button onClick={this._addButton}>{this.props.changeBy}</button>
+            <h1 className="App-logo">{this.state.value}</h1>
+        <button onClick={this._addButton} >{this.props.changeBy}</button>
         <button onClick={this._subtractButton}>-{this.props.changeBy}</button>
             <button onClick={this._resetButton}>Reset</button>
         </div>
         );
     };
 
+    // Write helper functions as arrow functions. Arrow functions retain the correct value of the 'this' keyword
     _addButton = () => {
         this.setState({
             value: this.state.value + this.props.changeBy

@@ -31,8 +31,15 @@
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
+    font-size: 8px;
   }
+
+  50% {
+    color: orange;
+  }
+
   to {
     transform: rotate(360deg);
+    font-size: 100px;
   }
 }
